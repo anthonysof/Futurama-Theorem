@@ -2,6 +2,13 @@ import random
 used_machine = []
 
 class Person():
+	"""this is a practical approach to the futurama theorem solution
+	I can't and possibly won't ever write it down mathematically so I came up
+	with that solution through experiments, this program simulates the mindswapping
+	brings in the two helpers and corrects everyone, it should work for "infinite" persons
+	WARNING!!! I trust the user (bad idea) giving valid input, due to lack of time 
+	my validation is to say the least lacking, maybe in the future...."""
+
 	#object person has 2 attributes, body and mind
 	def __init__(self, body, mind):
 		self.body = body
@@ -46,7 +53,7 @@ def main():
 	#by now all the characters are shuffled
 	#because the mindswapping is done randomly sometimes 2 characters
 	#that have used the machine before will attempt to mindswap again so a
-	#'Machine won't work message will appear
+	#'Machine won't work' message will appear
 
 	#You have to do some work to save the day though too
 	#It's easy though, all you have to do is search the mindswitching data printed
@@ -60,41 +67,45 @@ def main():
 		helper2_name = raw_input("Give the 2nd helper a name: ")
 		helper1 = Person(helper1_name, helper1_name)
 		helper2 = Person(helper2_name, helper2_name)
-		raw_input("Your help though is crucial too!\nYou have to spot the cycles formed after the permutations and type them down!\ne.g. If Zapp changed with Fry and with no once else just enter Zapp then Fry in group1 and then enter '' as a character when prompted to add another person. When you are finished with your cycles just answer 'n' in the appropriate question.\nGood luck! Press enter to continue...")
+		raw_input("Your help though is crucial too!\nYou have to spot the cycles formed after the permutations and type them down!\nGood luck! Press enter to continue...")
+		print "line1: bodies, line2: minds: "
+		bodies = []
+		minds = []
+		for person in persons:
+			bodies.append(person.body)
+			minds.append(person.mind)
+		print bodies
+		print minds
+		raw_input("Find the cycles/loops! You will have to input them!")
 		groups = []
-		group_ans = "n"
-		count = 0
-		print("First group:")
-		cycle_element = raw_input("Enter character: ")
-		while group_ans != "y":
+		done = "n"
+		groupcount = 1
+		while done != "y":
 			groupx = []
-			while cycle_element != "":
-				if cycle_element not in groupx:
-					#print "Entered cycle-groupx if" ~DEBUGGING
-					groupx.append(cycle_element)
-				else:
-					print "Already in group\nGive another: "
-					cycle_element = raw_input("Enter character: ")
-					continue
-				cycle_element = raw_input("Enter next character: ")
-			if groupx not in groups:
+			namedone = "n"
+			print "You are now giving me cycle #"+str(groupcount)+":"
+			while namedone != "y":
+				charname = raw_input("Give me character's name: ")
+				for person in persons:
+					if charname == person.body:
+						groupx.append(person)
+				namedone = raw_input("Done with this cycle? (y/n): ")
 				groups.append(groupx)
-				group_ans = raw_input("Are you done with your groups? (y/n) ")
-			else:
-				print "You have already submitted that cycle dummy! Don't lose it now!"
-		print ("Good job, well if you actually did a good job the mathematicians-basketball players will do the rest!\nYour groups are: "+groups
-		for group in groups:
-			helper1.mindSwitcher(group[-1])
-			for j in group:
+			print "Group #"+str(groupcount)+" complete."
+			done = raw_input("Done with all cycles? (y/n): ")
+			groupcount += 1
+		for groupx in groups:
+			helper1.mindSwitcher(groupx[-1])
+			for j in groupx:
 				helper2.mindSwitcher(j)
-			helper1.mindSwitcher(group[0])
-		if helper1.mind != helper1.name:
+			helper1.mindSwitcher(groupx[0])
+		if helper1.body != helper1.mind or helper2.body != helper2.mind:
 			helper1.mindSwitcher(helper2)
 		print "The day is saved! Here is everyone: "
 		for person in persons:
-			print person.name+" "+person.mind
-			print helper1.name+" "+helper1.mind
-			print helper2.name+" "+helper2.mind
+			print person.body+" "+person.mind
+		print helper1.body+" "+helper1.mind
+		print helper2.body+" "+helper2.mind
 
 	else:
 		print("Too bad, your characters are screwed...")
