@@ -101,8 +101,17 @@ def main():
 		print minds
 		raw_input("Find the cycles/loops! You will have to input them!")
 		raw_input("Just kidding, all hail the power of the machine! I will do the rest...")
+		#permToCycles writes my permutation as the product of cycles
 		cycles = permToCycles(bodies,minds)
 		groups = []
+		
+		#here is the solution of the problem
+		#probably deserving a function of its own but its 1:00 am
+		#the first thought was, 2 helpers for every cycle
+		#but (recalling there were only 2 dudes helping in the episode) the trick is to not
+		#mindswap them with eachother up until the last cycle is finished
+		#after the end of its cycle they will other be in each others bodies
+		#or each in his own, depends if the cycle is even/odd
 		for cycle in cycles:
 			if len(cycle)==1:
 				continue
@@ -120,6 +129,8 @@ def main():
 			helper1.mindSwitcher(groupx[0])
 		if helper1.body != helper1.mind or helper2.body != helper2.mind:
 			helper1.mindSwitcher(helper2)
+		
+		#rejoice!
 		print "The day is saved! Here is everyone: "
 		for person in persons:
 			print person.body+" "+person.mind
