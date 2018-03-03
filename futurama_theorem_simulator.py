@@ -33,6 +33,28 @@ def commence_experiment(times,chars):
 	for i in xrange(times):
 		random.choice(chars).mindSwitcher(random.choice(chars))
 
+def permToCycles(bodies, minds):
+	pi = dict(zip(bodies,minds))
+	cycles = []
+
+	while pi:
+		elem0 = next(iter(pi))
+		this_elem = pi[elem0]
+		next_item = pi[this_elem]
+
+		cycle = []
+		while True:
+			cycle.append(this_elem)
+			del pi[this_elem]
+			this_elem = next_item
+			if next_item in pi:
+				next_item = pi[next_item]
+			else:
+				break
+		cycles.append(cycle)
+	return cycles
+
+
 
 def main():
 	num_of_persons = int(raw_input("Give me the number of persons taking part in the 'experiment': "))
@@ -71,29 +93,26 @@ def main():
 		print "line1: bodies, line2: minds: "
 		bodies = []
 		minds = []
+		perm = []
 		for person in persons:
 			bodies.append(person.body)
 			minds.append(person.mind)
 		print bodies
 		print minds
 		raw_input("Find the cycles/loops! You will have to input them!")
+		raw_input("Just kidding, all hail the power of the machine! I will do the rest...")
+		cycles = permToCycles(bodies,minds)
 		groups = []
-		done = "n"
-		groupcount = 1
-		while done != "y":
-			groupx = []
-			namedone = "n"
-			print "You are now giving me cycle #"+str(groupcount)+":"
-			while namedone != "y":
-				charname = raw_input("Give me character's name: ")
-				for person in persons:
-					if charname == person.body:
-						groupx.append(person)
-				namedone = raw_input("Done with this cycle? (y/n): ")
-				groups.append(groupx)
-			print "Group #"+str(groupcount)+" complete."
-			done = raw_input("Done with all cycles? (y/n): ")
-			groupcount += 1
+		for cycle in cycles:
+			if len(cycle)==1:
+				continue
+			else:
+				groupy = []
+				for name in cycle:
+					for person in persons:
+						if person.body == name:
+							groupy.append(person)
+				groups.append(groupy)	
 		for groupx in groups:
 			helper1.mindSwitcher(groupx[-1])
 			for j in groupx:
