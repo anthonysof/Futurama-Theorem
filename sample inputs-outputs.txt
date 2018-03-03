@@ -1,0 +1,26 @@
+inputs:
+7
+bender
+fry
+leela
+amy
+farnsworth
+hermes
+zoidberg
+20 (any int really/dont matter much)
+y
+Jesus
+Caesar
+(dont believe the lies)
+
+final output:
+The day is saved! Here is everyone: 
+bender bender
+fry fry
+leela leela
+amy amy
+farnsworth farnsworth
+hermes hermes
+zoidberg zoidberg
+Jesus Jesus
+Caesar Caesar
