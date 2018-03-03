@@ -61,41 +61,15 @@ def main():
 		helper1 = Person(helper1_name, helper1_name)
 		helper2 = Person(helper2_name, helper2_name)
 		raw_input("Your help though is crucial too!\nYou have to spot the cycles formed after the permutations and type them down!\ne.g. If Zapp changed with Fry and with no once else just enter Zapp then Fry in group1 and then enter '' as a character when prompted to add another person. When you are finished with your cycles just answer 'n' in the appropriate question.\nGood luck! Press enter to continue...")
-		groups = []
-		group_ans = "n"
-		count = 0
-		print("First group:")
-		cycle_element = raw_input("Enter character: ")
-		while group_ans != "y":
-			groupx = []
-			while cycle_element != "":
-				if cycle_element not in groupx:
-					#print "Entered cycle-groupx if" ~DEBUGGING
-					groupx.append(cycle_element)
-				else:
-					print "Already in group\nGive another: "
-					cycle_element = raw_input("Enter character: ")
-					continue
-				cycle_element = raw_input("Enter next character: ")
-			if groupx not in groups:
-				groups.append(groupx)
-				group_ans = raw_input("Are you done with your groups? (y/n) ")
-			else:
-				print "You have already submitted that cycle dummy! Don't lose it now!"
-		print ("Good job, well if you actually did a good job the mathematicians-basketball players will do the rest!\nYour groups are: "+groups
-		for group in groups:
-			helper1.mindSwitcher(group[-1])
-			for j in group:
-				helper2.mindSwitcher(j)
-			helper1.mindSwitcher(group[0])
-		if helper1.mind != helper1.name:
-			helper1.mindSwitcher(helper2)
-		print "The day is saved! Here is everyone: "
+		print "line1: bodies, line2: minds: "
+		bodies = []
+		minds = []
 		for person in persons:
-			print person.name+" "+person.mind
-			print helper1.name+" "+helper1.mind
-			print helper2.name+" "+helper2.mind
-
+			bodies.append(person.body)
+			minds.append(person.mind)
+		print bodies
+		print minds
+		raw_input("Find the cycles/loops! You will have to input them!")
 	else:
 		print("Too bad, your characters are screwed...")
 
