@@ -77,11 +77,11 @@ def main():
 	#that have used the machine before will attempt to mindswap again so a
 	#'Machine won't work' message will appear
 
-	#You have to do some work to save the day though too
-	#It's easy though, all you have to do is search the mindswitching data printed
-	#and try to find cycles/loops of characters/minds
-	#the program will guide you and do the rest
-	#it is case-sensitive...
+	#In this segment it will create the two helpers needed
+	#You can name them!
+	#My first draft used to had the user find the cycles in the permutation and type them in
+	#which is really tiresome for even a small number of persons
+	#now the process is automated but I left the warning messages in as a cruel joke
 	answer = raw_input("Ready to return everyone to normal? (y/n): ")
 	if answer == "y":
 		raw_input("Two mathematician-basketball players arrive to save the day \nPress enter to continue...")
@@ -101,7 +101,7 @@ def main():
 		print minds
 		raw_input("Find the cycles/loops! You will have to input them!")
 		raw_input("Just kidding, all hail the power of the machine! I will do the rest...")
-		#permToCycles writes my permutation as the product of cycles
+		#permToCycles writes my permutation as the product of foreign cycles
 		cycles = permToCycles(bodies,minds)
 		groups = []
 		
@@ -110,7 +110,7 @@ def main():
 		#the first thought was, 2 helpers for every cycle
 		#but (recalling there were only 2 dudes helping in the episode) the trick is to not
 		#mindswap them with eachother up until the last cycle is finished
-		#after the end of its cycle they will other be in each others bodies
+		#after the end of its cycle they will either be in each others bodies
 		#or each in his own, depends if the cycle is even/odd
 		for cycle in cycles:
 			if len(cycle)==1:
@@ -138,6 +138,7 @@ def main():
 		print helper2.body+" "+helper2.mind
 
 	else:
+		#welp
 		print("Too bad, your characters are screwed...")
 
 
